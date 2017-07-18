@@ -1,5 +1,5 @@
 {
-  "name": "simple-server-node",
+  "name": "aquarium_raspberry",
   "version": "1.0.0",
   "description": "A simple Expressjs Web server on resin.io",
   "main": "server.js",
@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/resin-io-projects/simple-server-node.git"
+    "url": "git+https://github.com/Dimitriou/aquarium_raspberry"
   },
   "keywords": [
     "resin.io",
@@ -18,7 +18,7 @@
     "nodejs",
     "expressjs"
   ],
-  "author": "Shaun Mulligan <shaun@resin.io>",
+  "author": "Dimitriou George",
   "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/resin-io-projects/simple-server-node/issues"
