@@ -5,6 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "preinstall": "bash deps.sh",
     "start": "node server.js"
   },
   "repository": {
@@ -25,6 +26,6 @@
   "homepage": "https://github.com/resin-io-projects/simple-server-node#readme",
   "dependencies": {
     "express": "*",
-    "rpio": "*"
+    "pi-pins": "~1.0.2"
   }
 }
