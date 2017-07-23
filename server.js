@@ -1,4 +1,53 @@
-nodeServer();
+// *** main dependencies *** //
+var express = require('express');
+var path = require('path');
+var bodyParser = require('body-parser');
+var swig = require('swig');
+
+// *** routes *** //
+var routes = require('./routes/index.js');
+
+// *** express instance *** //
+var app = express();
+
+// *** view engine *** //
+var swig = new swig.Swig();
+app.engine('html', swig.renderFile);
+app.set('view engine', 'html');
+
+
+// *** static directory *** //
+app.set('views', path.join(__dirname, 'views'));
+
+// *** config middleware *** //
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.static(path.join(__dirname, './client/public')));
+
+
+// *** main routes *** //
+app.use('/', routes);
+
+
+// catch 404 and forward to error handler
+app.use(function(req, res, next) {
+  var err = new Error('Not Found');
+  err.status = 404;
+  next(err);
+});
+
+//start a server on port 80 and log its start to our console
+var server = app.listen(80, function () {
+
+  var port = server.address().port;
+  console.log('Example app listening on port ', port);
+
+});
+
+
+
+
+//////////////////// *** FUNCTIONS *** ////////////////////
 
 function GPIO() {
 	var  ledToggle, pressCount;
@@ -23,20 +72,20 @@ function GPIO() {
 	});	
 }
 
-function nodeServer() {
-	var express = require('express');
-	var app = express();
 
-	// reply to request with "Hello World!"
-	app.get('/', function (req, res) {
-	  res.send('Hello World Paok 1!');
-	});
+function foodNow(seconds) {
 
-	//start a server on port 80 and log its start to our console
-	var server = app.listen(80, function () {
-
-	  var port = server.address().port;
-	  console.log('Example app listening on port ', port);
-
-	});
 }
+
+
+function foodVacations(seconds, vacation_time) {
+
+}
+
+
+function foodAuto(seconds) {
+
+}
+
+
+module.exports = app;
