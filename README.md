@@ -12,7 +12,7 @@ This tutorial demonstrates how to use a 'raspberry pi 3' with 'resinos' to feed 
 6) Cardboard pieces
 7) Bottle cap
 
-### Get started
+## Get started
 After, the right installation of the components, you can create your own aquarium-raspberry-app by following the next steps:
 
 1) Clone project
@@ -20,12 +20,12 @@ After, the right installation of the components, you can create your own aquariu
 $ git clone https://github.com/Dimitriou/aquarium_raspberry.git
 ```
 
-2) Customize server, execute with:
+2) Test server, execute with:
 ```bash
 $ node server.js
 ```
 
-3) Deploy
+3) Deploy your server and test the raspberry
 
 Deploy your nodejs-server-aquarium-rasberry-app to your raspberry using the resinos of Resin.io.
 
