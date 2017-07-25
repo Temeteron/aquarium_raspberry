@@ -24,9 +24,9 @@
   },
   "homepage": "https://github.com/resin-io-projects/simple-server-node#readme",
   "dependencies": {
+    "body-parser": "~1.13.2",
     "express": "*",
-    "pi-pins": "*",
-    "swig": "^1.4.2",
-    "body-parser": "~1.13.2"
+    "express-handlebars": "*",
+    "pi-pins": "*"
   }
 }

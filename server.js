@@ -3,6 +3,8 @@ var express = require('express');
 var path = require('path');
 var bodyParser = require('body-parser');
 var swig = require('swig');
+var express = require('express');
+var exphbs  = require('express-handlebars');
 
 // *** routes *** //
 var routes = require('./routes/index.js');
@@ -11,9 +13,9 @@ var routes = require('./routes/index.js');
 var app = express();
 
 // *** view engine *** //
-var swig = new swig.Swig();
-app.engine('html', swig.renderFile);
-app.set('view engine', 'html');
+
+app.engine('handlebars', exphbs({defaultLayout: 'main'}));
+app.set('view engine', 'handlebars');
 
 
 // *** static directory *** //
