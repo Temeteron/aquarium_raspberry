@@ -13,6 +13,8 @@ This tutorial demonstrates how to use a 'raspberry pi 3' with 'resinos' to feed 
 7) Bottle cap
 
 ## Get started
+
+### Download-change-deploy code
 After, the right installation of the components, you can create your own aquarium-raspberry-app by following the next steps:
 
 1) Clone project
@@ -30,3 +32,16 @@ $ node server.js
 Deploy your nodejs-server-aquarium-rasberry-app to your raspberry using the resinos of Resin.io.
 
 You can find a full tutorial about deploying a nodejs server to a raspberry with resinos [here](https://docs.resin.io/raspberrypi3/nodejs/getting-started/).
+
+Note: Briefly, in the tutorial you will: 
+1) sing-up/log-in to resin.io
+2) create an application
+3) download the operating system 'resinos'
+4) burn it to an sd with [Etcher](https://etcher.io/) or any other program
+5) insert the sd to you Raspberry Pi 3
+6) connect it to power and internet
+7) deploy your first code as mentioned in the [tutorial](https://docs.resin.io/raspberrypi3/nodejs/getting-started/)
+
+After those steps, you can wath the state of your Raspberry Pi 3, access your nodejs-server/web-site via a public url, even access your Raspberry from a web terminal with ssh, which is provided by resin.io. All that from the resin dashboard!
+### Connect the components
+...
