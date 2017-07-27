@@ -42,6 +42,11 @@ Note: Briefly, in the tutorial you will:
 6) connect it to power and internet
 7) deploy your first code as mentioned in the [tutorial](https://docs.resin.io/raspberrypi3/nodejs/getting-started/)
 
-After those steps, you can wath the state of your Raspberry Pi 3, access your nodejs-server/web-site via a public url, even access your Raspberry from a web terminal with ssh, which is provided by resin.io. All that from the resin dashboard!
+After those steps, you can watch the state of your Raspberry Pi 3, access your nodejs-server/web-site via a public url, even access your Raspberry from a web terminal with ssh, which is provided by resin.io. All that from the resin dashboard!
 ### Connect the components
+
+1) Connect Servo Motor to GPIO
+
+![alt text](https://github.com/Temeteron/aquarium_raspberry/tree/master/client/public/img/servo.png "Servo to GPIO")
+
 ...
