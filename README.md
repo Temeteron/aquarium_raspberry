@@ -47,6 +47,6 @@ After those steps, you can watch the state of your Raspberry Pi 3, access your n
 
 1) Connect Servo Motor to GPIO
 
-![alt text](https://github.com/Temeteron/aquarium_raspberry/client/public/img/servo.png "Servo to GPIO")
+![alt text](https://github.com/Temeteron/aquarium_raspberry/blob/master/client/public/img/servo.png?raw=true "Servo to GPIO")
 
 ...
