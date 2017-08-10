@@ -90,15 +90,14 @@ function foodAuto(seconds) {
 	console.log("function: FOOD AUTO");
 }
 
-
 function connectGPIO() {
 	var servo = require("pi-pins").connect(17);
 
 	servo.mode('out');
 
-	servo.value(true);
+	servo.value(false);
 	setTimeout(function(){
-		servo.value(false);
+		servo.value(true);
 		console.log("Servo closed");
 	},30000);
 }
