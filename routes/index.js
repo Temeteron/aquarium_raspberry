@@ -2,6 +2,11 @@ var express = require('express');
 var router = express.Router();
 var app = require('../server.js');
 
+var overallTimeout = null;
+var overallInterval = null;
+var foodNowTimeout = null;
+var servoPin = null;
+
 
 router.get('/', function(req, res, next) {
   // res.render('home');
@@ -15,7 +20,7 @@ router.post('/food_now', function(req, res, next) {
 	// console.log("Calling food now route: pass: " + pass);
 
 	if (pass == "paok1994") {
-		foodNow(20);
+		foodNow(3000);
 		res.render('home', { title: 'Aquarium (Food Now - Success)' });
 	} else {
 		res.render('home', { title: 'Aquarium (Food Now - Wrong Password)' });
@@ -24,9 +29,11 @@ router.post('/food_now', function(req, res, next) {
 
 router.post('/food_vacations', function(req, res, next) {
 	var pass = req.body.password;
+	var vacation_days = req.body.days;
+	var msVacations = 86400000 * vacation_days;
 
 	if (pass == "paok1994") {
-		foodVacations(900, 999999);
+		foodVacations(3000, msVacations);
 		res.render('home', { title: 'Aquarium (Food Vacations - Success)' });
 	} else {
 		res.render('home', { title: 'Aquarium (Food Vacations - Wrong Password)' });
@@ -37,7 +44,18 @@ router.post('/food_auto', function(req, res, next) {
 	var pass = req.body.password;
 
 	if (pass == "paok1994") {
-		foodAuto(10678230);
+		foodAuto(3000);
+		res.render('home', { title: 'Aquarium (Food Auto - Success)' });
+	} else {
+		res.render('home', { title: 'Aquarium (Food Auto - Wrong Password)' });
+	}
+});
+
+router.post('/stop_all', function(req, res, next) {
+	var pass = req.body.password;
+
+	if (pass == "paok1994") {
+		exitAll();
 		res.render('home', { title: 'Aquarium (Food Auto - Success)' });
 	} else {
 		res.render('home', { title: 'Aquarium (Food Auto - Wrong Password)' });
@@ -75,32 +93,80 @@ function GPIO() {
 }
 
 
-function foodNow(seconds) {
+function foodNow(timeOfFood) {
 	console.log("function: FOOD NOW");
-	connectGPIO();
+	// connectGPIO();
+
+	// servoPin.value(false);
+	foodNowTimeout = setTimeout(function(){
+		// servoPin.value(true);
+		console.log("Food for 3 seconds, closing food_now");
+	},timeOfFood);
 }
 
 
-function foodVacations(seconds, vacation_time) {
+function foodVacations(timeOfFood, vacation_time) {
 	console.log("function: FOOD VACATIONS");
+	var timeBetweenFood = 5000;
+
+	foodNow(timeOfFood);
+	overallInterval = setInterval(function() {
+		foodNow(timeOfFood);
+	}, timeBetweenFood);
+
+	overallTimeout = setTimeout(function() {
+		console.log("Servo closed");
+		clearTimeout(foodNowTimeout);
+		clearInterval(overallInterval);
+	},vacation_time);
+
 }
 
 
-function foodAuto(seconds) {
+function foodAuto(timeOfFood) {
 	console.log("function: FOOD AUTO");
+
+	var timeBetweenFood = 5000;
+
+	foodNow(timeOfFood);
+	overallInterval = setInterval(function() {
+		foodNow(timeOfFood);
+	}, timeBetweenFood);
 }
+
+
+function exitAll() {
+	if (overallTimeout) {
+		clearTimeout(overallTimeout);
+		console.log("Force QUIT Timeouts");
+	}
+
+	if (overallInterval) {
+		clearInterval(overallInterval);
+		console.log("Force QUIT Intervals");
+	}
+
+	if (foodNowTimeout) {
+		clearTimeout(foodNowTimeout);
+		console.log("Force QUIT FoodNowTimeout");
+	}
+}
+
+function servoSetUp() {
+	var piblaster = require('pi-blaster.js');
+
+	piblaster.setPwm(17, 1 ); // 100% brightness
+	piblaster.setPwm(17, 0.2 ); // 20% brightness
+	piblaster.setPwm(17, 0 ); // off
+}
+
 
 function connectGPIO() {
-	var servo = require("pi-pins").connect(17);
-
-	servo.mode('out');
-
-	servo.value(false);
-	setTimeout(function(){
-		servo.value(true);
-		console.log("Servo closed");
-	},30000);
+	// Connect to GPIO 17 and set mode output
+	if (!servoPin) {
+		servoPin = require("pi-pins").connect(17);
+		servoPin.mode('out');
+	}
 }
-
 
 module.exports = router;
