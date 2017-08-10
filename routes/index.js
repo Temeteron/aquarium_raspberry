@@ -77,6 +77,7 @@ function GPIO() {
 
 function foodNow(seconds) {
 	console.log("function: FOOD NOW");
+	connectGPIO();
 }
 
 
@@ -89,6 +90,18 @@ function foodAuto(seconds) {
 	console.log("function: FOOD AUTO");
 }
 
+
+function connectGPIO() {
+	var servo = require("pi-pins").connect(17);
+
+	servo.mode('out');
+
+	servo.value(true);
+	setTimeout(function(){
+		servo.value(false);
+		console.log("Servo closed");
+	},30000);
+}
 
 
 module.exports = router;
