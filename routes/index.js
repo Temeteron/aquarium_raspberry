@@ -95,11 +95,11 @@ function GPIO() {
 
 function foodNow(timeOfFood) {
 	console.log("function: FOOD NOW");
-	// connectGPIO();
+	connectGPIO();
 
-	// servoPin.value(false);
+	servoPin.value(false);
 	foodNowTimeout = setTimeout(function(){
-		// servoPin.value(true);
+		servoPin.value(true);
 		console.log("Food for 3 seconds, closing food_now");
 	},timeOfFood);
 }
