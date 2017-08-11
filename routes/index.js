@@ -98,6 +98,7 @@ function foodNow(timeOfFood) {
 	// connectGPIO();
 
 	// servoPin.value(false);
+	servoSetUp();
 	foodNowTimeout = setTimeout(function(){
 		// servoPin.value(true);
 		console.log("Food for 3 seconds, closing food_now");
@@ -154,10 +155,11 @@ function exitAll() {
 
 function servoSetUp() {
 	var piblaster = require('pi-blaster.js');
-
+	console.log("Calling servoSetUp");
+	
 	piblaster.setPwm(17, 1 ); // 100% brightness
-	piblaster.setPwm(17, 0.2 ); // 20% brightness
-	piblaster.setPwm(17, 0 ); // off
+	// piblaster.setPwm(17, 0.2 ); // 20% brightness
+	// piblaster.setPwm(17, 0 ); // off
 }
 
 
