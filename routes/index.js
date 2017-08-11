@@ -5,6 +5,7 @@ var app = require('../server.js');
 var overallTimeout = null;
 var overallInterval = null;
 var foodNowTimeout = null;
+var servoInterval = null;
 var servoPin = null;
 
 
@@ -98,7 +99,7 @@ function foodNow(timeOfFood) {
 	// connectGPIO();
 
 	// servoPin.value(false);
-	servoSetUp();
+	servoPiGpio();
 	foodNowTimeout = setTimeout(function(){
 		// servoPin.value(true);
 		console.log("Food for 3 seconds, closing food_now");
@@ -151,15 +152,42 @@ function exitAll() {
 		clearTimeout(foodNowTimeout);
 		console.log("Force QUIT FoodNowTimeout");
 	}
+
+	if (servoInterval) {
+		clearInterval(servoInterval);
+		console.log("Force QUIT servoInterval");
+	}
 }
 
 function servoSetUp() {
 	var piblaster = require('pi-blaster.js');
 	console.log("Calling servoSetUp");
-	
+
 	piblaster.setPwm(17, 1 ); // 100% brightness
 	// piblaster.setPwm(17, 0.2 ); // 20% brightness
 	// piblaster.setPwm(17, 0 ); // off
+}
+
+function servoPiGpio() {
+	console.log("Calling servoPiGpio");	
+	var Gpio = require('pigpio').Gpio,
+	motor = new Gpio(17, {mode: Gpio.OUTPUT}),
+	pulseWidth = 1000,
+	increment = 100;
+
+	console.log("Gpio: " + Gpio);
+
+	servoInterval = setInterval(function () {
+	  console.log("servoWrite");
+	  motor.servoWrite(pulseWidth);
+
+	  pulseWidth += increment;
+	  if (pulseWidth >= 2000) {
+	    increment = -100;
+	  } else if (pulseWidth <= 1000) {
+	    increment = 100;
+	  }
+	}, 1000);
 }
 
 
