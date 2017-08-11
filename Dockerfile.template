@@ -30,7 +30,7 @@ FROM resin/%%RESIN_MACHINE_NAME%%-node:latest
 
 RUN apt-get install -y build-essential
 
-# ADD . /app
+ADD . /app
 
 RUN cd /app/pi-blaster && make pi-blaster
 
