@@ -36,7 +36,7 @@ RUN apt-get install -y build-essential
 
 # ADD . /app
 
-RUN cd /pi-blaster && make pi-blaster
+RUN cd /app/pi-blaster && make pi-blaster
 
 # CMD ["bash", "/app/start.sh"]
 #############################################
