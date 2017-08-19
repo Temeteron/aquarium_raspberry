@@ -58,9 +58,9 @@ router.post('/stop_all', function(req, res, next) {
 
 	if (pass == "paok1994") {
 		exitAll();
-		res.render('home', { title: 'Aquarium (Food Auto - Success)' });
+		res.render('home', { title: 'Aquarium (Stop All - Success)' });
 	} else {
-		res.render('home', { title: 'Aquarium (Food Auto - Wrong Password)' });
+		res.render('home', { title: 'Aquarium (Stop All - Wrong Password)' });
 	}
 });
 
@@ -168,14 +168,14 @@ function servoStart() {
 	// var piblaster = require('pi-blaster.js');
 	console.log("Calling servoStart");
 
-	piblaster.setPwm(22, 0.7);
+	piblaster.setPwm(17, 0.99);
 }
 
 function servoStop() {
 	// var piblaster = require('pi-blaster.js');
 	console.log("Calling servoStop");
 
-	piblaster.setPwm(22, 1);
+	piblaster.setPwm(17, 1);
 }
 
 // Used for everything that doesn't need PWM pulse (led, relay, etc)
