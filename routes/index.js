@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var app = require('../server.js');
+var piblaster = require('pi-blaster.js');
 
 var overallTimeout = null;
 var overallInterval = null;
@@ -99,9 +100,11 @@ function foodNow(timeOfFood) {
 	// connectGPIO();
 
 	// servoPin.value(false);
-	servoPiGpio();
+
+	servoStart();
 	foodNowTimeout = setTimeout(function(){
 		// servoPin.value(true);
+		servoStop();
 		console.log("Food for 3 seconds, closing food_now");
 	},timeOfFood);
 }
@@ -109,7 +112,7 @@ function foodNow(timeOfFood) {
 
 function foodVacations(timeOfFood, vacation_time) {
 	console.log("function: FOOD VACATIONS");
-	var timeBetweenFood = 5000;
+	var timeBetweenFood = 10000;
 
 	foodNow(timeOfFood);
 	overallInterval = setInterval(function() {
@@ -128,7 +131,7 @@ function foodVacations(timeOfFood, vacation_time) {
 function foodAuto(timeOfFood) {
 	console.log("function: FOOD AUTO");
 
-	var timeBetweenFood = 5000;
+	var timeBetweenFood = 10000;
 
 	foodNow(timeOfFood);
 	overallInterval = setInterval(function() {
@@ -159,36 +162,41 @@ function exitAll() {
 	}
 }
 
-function servoSetUp() {
-	var piblaster = require('pi-blaster.js');
-	console.log("Calling servoSetUp");
+function servoStart() {
+	// var piblaster = require('pi-blaster.js');
+	console.log("Calling servoStart");
 
-	piblaster.setPwm(17, 1 ); // 100% brightness
-	// piblaster.setPwm(17, 0.2 ); // 20% brightness
-	// piblaster.setPwm(17, 0 ); // off
+	piblaster.setPwm(22, 0.7);
 }
 
-function servoPiGpio() {
-	console.log("Calling servoPiGpio");	
-	var Gpio = require('pigpio').Gpio,
-	motor = new Gpio(17, {mode: Gpio.OUTPUT}),
-	pulseWidth = 1000,
-	increment = 100;
+function servoStop() {
+	// var piblaster = require('pi-blaster.js');
+	console.log("Calling servoStop");
 
-	console.log("Gpio: " + Gpio);
-
-	servoInterval = setInterval(function () {
-	  console.log("servoWrite");
-	  motor.servoWrite(pulseWidth);
-
-	  pulseWidth += increment;
-	  if (pulseWidth >= 2000) {
-	    increment = -100;
-	  } else if (pulseWidth <= 1000) {
-	    increment = 100;
-	  }
-	}, 1000);
+	piblaster.setPwm(22, 1);
 }
+
+// function servoPiGpio() {
+// 	console.log("Calling servoPiGpio");	
+// 	var Gpio = require('pigpio').Gpio,
+// 	motor = new Gpio(17, {mode: Gpio.OUTPUT}),
+// 	pulseWidth = 1000,
+// 	increment = 100;
+
+// 	console.log("Gpio: " + Gpio);
+
+// 	servoInterval = setInterval(function () {
+// 	  console.log("servoWrite");
+// 	  motor.servoWrite(pulseWidth);
+
+// 	  pulseWidth += increment;
+// 	  if (pulseWidth >= 2000) {
+// 	    increment = -100;
+// 	  } else if (pulseWidth <= 1000) {
+// 	    increment = 100;
+// 	  }
+// 	}, 1000);
+// }
 
 
 function connectGPIO() {
