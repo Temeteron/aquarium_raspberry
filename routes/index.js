@@ -113,6 +113,7 @@ function foodNow(timeOfFood) {
 function foodVacations(timeOfFood, vacation_time) {
 	console.log("function: FOOD VACATIONS");
 	var timeBetweenFood = 10000;
+	// var timeBetweenFood = 43200000;
 
 	foodNow(timeOfFood);
 	overallInterval = setInterval(function() {
@@ -130,8 +131,9 @@ function foodVacations(timeOfFood, vacation_time) {
 
 function foodAuto(timeOfFood) {
 	console.log("function: FOOD AUTO");
-
 	var timeBetweenFood = 10000;
+	// var timeBetweenFood = 43200000;
+
 
 	foodNow(timeOfFood);
 	overallInterval = setInterval(function() {
@@ -176,29 +178,7 @@ function servoStop() {
 	piblaster.setPwm(22, 1);
 }
 
-// function servoPiGpio() {
-// 	console.log("Calling servoPiGpio");	
-// 	var Gpio = require('pigpio').Gpio,
-// 	motor = new Gpio(17, {mode: Gpio.OUTPUT}),
-// 	pulseWidth = 1000,
-// 	increment = 100;
-
-// 	console.log("Gpio: " + Gpio);
-
-// 	servoInterval = setInterval(function () {
-// 	  console.log("servoWrite");
-// 	  motor.servoWrite(pulseWidth);
-
-// 	  pulseWidth += increment;
-// 	  if (pulseWidth >= 2000) {
-// 	    increment = -100;
-// 	  } else if (pulseWidth <= 1000) {
-// 	    increment = 100;
-// 	  }
-// 	}, 1000);
-// }
-
-
+// Used for everything that doesn't need PWM pulse (led, relay, etc)
 function connectGPIO() {
 	// Connect to GPIO 17 and set mode output
 	if (!servoPin) {
