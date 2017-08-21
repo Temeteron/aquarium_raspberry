@@ -28,8 +28,10 @@ FROM resin/%%RESIN_MACHINE_NAME%%-node:latest
 # Option of servo repo
 #FROM resin/rpi-node:latest
 
+RUN apt-get update
 RUN apt-get install -y build-essential
 RUN apt-get install autoconf
+RUN apt-get install automake
 
 #RUN apt-get update
 #RUN apt-get install pigpio

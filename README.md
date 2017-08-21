@@ -62,12 +62,8 @@ $ cd /usr/src/app/pi-blaster
 ```
 2) Install required libraries for [pi-blaster](https://github.com/sarfata/pi-blaster#how-to-use):
 ```bash
-sudo apt-get install autoconf
-sudo apt-get update
-sudo apt-get automake
 ./autogen.sh
-./configure
-make
+./configure && make
 sudo make install
 sudo ./pi-blaster
 ```

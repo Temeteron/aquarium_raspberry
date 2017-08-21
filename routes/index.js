@@ -146,21 +146,25 @@ function exitAll() {
 	if (overallTimeout) {
 		clearTimeout(overallTimeout);
 		console.log("Force QUIT Timeouts");
+		overallTimeout = null;
 	}
 
 	if (overallInterval) {
 		clearInterval(overallInterval);
 		console.log("Force QUIT Intervals");
+		overallInterval = null;
 	}
 
 	if (foodNowTimeout) {
 		clearTimeout(foodNowTimeout);
 		console.log("Force QUIT FoodNowTimeout");
+		foodNowTimeout = null;
 	}
 
 	if (servoInterval) {
 		clearInterval(servoInterval);
 		console.log("Force QUIT servoInterval");
+		servoInterval = null;
 	}
 }
 
